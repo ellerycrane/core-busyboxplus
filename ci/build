@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -e -x
+
 IMAGE_ROOT="$PWD/image-root"
 
 mkdir -p /sys/fs/cgroup
@@ -21,7 +23,7 @@ done
 
 cd core-busyboxplus
 
-rsync -a "./${FLAVOR}/" "${IMAGE_ROOT}/"
+cp -a ./${FLAVOR}/* ${IMAGE_ROOT}
 
 docker build -t tarmaker $FLAVOR/tarmaker
 docker run --name builder tarmaker
