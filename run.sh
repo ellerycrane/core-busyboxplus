@@ -24,7 +24,12 @@ docker build -t tarmaker:$1 $1/tarmaker || {
 docker run --name builder-$1 tarmaker:$1
 docker cp builder-$1:/tmp/rootfs.tar $1
 docker cp builder-$1:/tmp/rootfs.tar.md5 $1
-sudo chown 1000:1000 $1/rootfs*
+
+if [ "$(id -u)" = "0" ]; then
+  chown 1000:1000 $1/rootfs*
+else
+  sudo chown 1000:1000 $1/rootfs*
+fi
 
 cd $1
 
