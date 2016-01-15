@@ -1,6 +1,6 @@
 #!/bin/sh
 
-BUILT_IMAGE=$PWD/built-image
+IMAGE_ROOT="$PWD/image-root"
 
 mkdir -p /sys/fs/cgroup
 mountpoint -q /sys/fs/cgroup || \
@@ -21,6 +21,14 @@ done
 
 cd core-busyboxplus
 
-./run.sh $FLAVOR
+rsync -a "./${FLAVOR}/" "${IMAGE_ROOT}/"
 
-docker save -o $BUILT_IMAGE/image concourse/busyboxplus:$FLAVOR
+docker build -t tarmaker $FLAVOR/tarmaker
+docker run --name builder tarmaker
+docker cp builder:/tmp/rootfs.tar "$IMAGE_ROOT"
+docker cp builder:/tmp/rootfs.tar.md5 "$IMAGE_ROOT"
+
+chown 1000:1000 "$IMAGE_ROOT"/rootfs*
+
+docker rm -f builder
+docker rmi tarmaker
