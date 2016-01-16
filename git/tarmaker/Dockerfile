@@ -88,7 +88,6 @@ RUN             rm -f \
                     git-cvsexportcommit \
                     git-cvsimport \
                     git-cvsserver \
-                    git-daemon \
                     git-describe \
                     git-diff \
                     git-diff-files \
