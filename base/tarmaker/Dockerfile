@@ -1,4 +1,4 @@
-# Dockerfile for busybox+iptables using buildroot
+# Dockerfile for busybox using buildroot
 FROM            ubuntu:14.04
 
 # Install packages
