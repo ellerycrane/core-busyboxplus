@@ -1,7 +1,9 @@
 ---
 platform: linux
 
-image: docker:///docker#dind
+image_resource:
+  type: docker-image
+  source: {repository: docker, tag: dind}
 
 inputs:
 - name: core-busyboxplus
