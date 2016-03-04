@@ -30,8 +30,7 @@ RUN             wget -nv http://buildroot.uclibc.org/downloads/buildroot-$BR_VER
 
 # Extract
 RUN             tar -zxf buildroot-$BR_VERSION.tar.gz &&\
-                mv buildroot-$BR_VERSION buildroot &&\
-                sed -i 's/GIT_VERSION = .*/GIT_VERSION = 2.4.3/g' /tmp/builder/buildroot/package/git/git.mk
+                mv buildroot-$BR_VERSION buildroot
 WORKDIR         /tmp/builder/buildroot
 
 
