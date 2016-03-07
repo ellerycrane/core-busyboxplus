@@ -6,4 +6,6 @@ ADD             bashrc /root/.bashrc
 ENV             HOME /root
 ENV             ENV $HOME/.bashrc
 
+ADD             hgrc /etc/mercurial/hgrc
+
 CMD             ["/bin/sh"]
